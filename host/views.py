@@ -1,6 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response
+from django.db import connection
 # Create your views here.
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -28,7 +28,16 @@ class HostAdd(CreateView):
 
 
 class HostDel(DeleteView):
-    pass
+    def get(self, request):
+        ids = request.GET.get("ids")
+        # Host.objects.filter()
+        if ids.endswith(","):
+            ids = ids[:-1]
+            idlist = ids.split(",")
+        print(idlist)
+        with connection.cursor() as cursor:
+            cursor.execute("delete from hm_host where id in %s", [idlist])
+        return HttpResponseRedirect("/host/list")
 
 
 class HostEdit(UpdateView):
