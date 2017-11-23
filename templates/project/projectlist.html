@@ -1,0 +1,90 @@
+{% extends "common/index.html" %}
+
+{% block content %}
+
+
+     <div class="row clearfix">
+		<div class="col-md-12 column">
+            <a href="/project/add"><button type="button" class="btn btn-default btn-success">新增</button></a>
+            <a href=""> <button type="button" class="btn btn-default btn-danger">删除</button></a>
+		</div>
+	</div>
+
+    <p> 列表</p>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+                        <th></th>
+						<th>
+							编号
+						</th>
+						<th>
+							项目名
+						</th>
+						<th>
+							交付时间
+						</th>
+						<th>
+							状态
+						</th>
+					</tr>
+				</thead>
+
+
+
+				<tbody>
+                    {% for project in projectList %}
+					<tr>
+                        <td><input type="checkbox"/></td>
+						<td>
+							1
+						</td>
+						<td>
+							{{ project.name }}
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Default
+						</td>
+					</tr>
+                {% endfor %}
+				</tbody>
+			</table>
+		</div>
+    </div>
+
+    {#分页#}
+    	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="pagination">
+				<li>
+					 <a href="#">Prev</a>
+				</li>
+				<li>
+					 <a href="#">1</a>
+				</li>
+				<li>
+					 <a href="#">2</a>
+				</li>
+				<li>
+					 <a href="#">3</a>
+				</li>
+				<li>
+					 <a href="#">4</a>
+				</li>
+				<li>
+					 <a href="#">5</a>
+				</li>
+				<li>
+					 <a href="#">Next</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+{% endblock %}

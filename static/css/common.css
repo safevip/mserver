@@ -1,0 +1,27 @@
+/*头部*/
+.headerBar {
+    height:70px;
+    background: #3cb5ec;
+    width: 100%;
+}
+
+.headerBarRight {
+    float: right;
+    color: #fff;
+    line-height: 70px;
+}
+
+
+
+/*左部导航*/
+.leftBar{
+    width: 255px;
+    left: 0px;
+    height: 876px;
+    background: #e9ecef;
+}
+
+/*主内容*/
+.rightContent{
+    /*display: inline;*/
+}
