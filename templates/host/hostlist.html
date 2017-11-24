@@ -7,8 +7,8 @@
 
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <button type="button" class="btn btn-default btn-success">新增</button>
-            <button type="button" class="btn btn-default btn-danger">删除</button>
+            <a href="/host/add"><button type="button" class="btn btn-default btn-success">新增</button></a>
+            <button id="hostDelBtn" type="button" class="btn btn-default btn-danger">删除</button>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
                         交付时间
                     </th>
                     <th>
-                        状态
+                        操作
                     </th>
                 </tr>
                 </thead>
@@ -38,7 +38,7 @@
                 <tbody>
                 {% for host in hostList %}
                     <tr>
-                        <td><input type="checkbox"/></td>
+                        <td><input type="checkbox" name="hostCheckBox" data-hostId={{ host.id }} /></td>
                         <td>
                             {{ host.hostname }}
                         </td>
@@ -49,7 +49,7 @@
                             123
                         </td>
                         <td>
-                            Default
+                            <a href="/host/detail?id={{ host.id }}"><button class="btn-success">详情</button></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -86,5 +86,32 @@
             </ul>
         </div>
     </div>
+{% endblock %}
 
+{% block scriptblock %}
+<script>
+    $(function () {
+        $("#hostDelBtn").click(
+                function () {
+                    var hostIds = getHostIds();
+                    if(hostIds == ""){
+                        return;
+                    }
+                     location.href = '/host/del?ids='+hostIds;
+                }
+        )
+    });
+
+
+    function getHostIds() {
+        var hostIds = "";
+        var checkedList = document.getElementsByName("hostCheckBox");
+        for(var host of checkedList){
+            if(host.checked){
+                hostIds += host.attributes["data-hostId"].value + ",";
+            }
+        }
+        return hostIds;
+    }
+</script>
 {% endblock %}
