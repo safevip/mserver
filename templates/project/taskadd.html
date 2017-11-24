@@ -1,0 +1,21 @@
+{% extends "common/index.html" %}
+
+{% block content %}
+    {#    {% for host in hostList %}#}
+    {#        主机名:{{ host.hostname }} <br/>#}
+    {#    {% endfor %}#}
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form method="post">
+                {% csrf_token %}
+                {#                ahaha <input type="text" placeholder="ahaha">#}
+                {{ form }}
+{#                <input type="hidden" name="projectId" value="{{ task.project.id }}">#}
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

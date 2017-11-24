@@ -26,7 +26,7 @@ class Task(models.Model):
     desc = models.TextField(verbose_name='任务描述')
     type = models.CharField(max_length=10, verbose_name='任务类型')
     script = models.TextField(verbose_name='任务脚本')
-    # host = models.ForeignKey(Host)
+    project = models.ForeignKey(Project, verbose_name="项目")
 
     def __str__(self):
         return self.name
