@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.db import connection
 # Create your views here.
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from host.forms import HostForm
 from host.models import Host
@@ -15,8 +15,15 @@ class HostList(ListView):
     template_name = "host/hostlist.html"
 
 
-class HostDetail:
-    pass
+class HostDetail(DetailView):
+    context_object_name = 'host'
+    # queryset = Host.objects.get()
+    def get(self, request):
+        id = request.GET.get("id")
+        print(">>>>>>>>"+id)
+        host = Host.objects.get(pk=id)
+        return render_to_response("host/hostdetail.html", locals())
+
 
 
 class HostAdd(CreateView):

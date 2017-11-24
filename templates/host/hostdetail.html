@@ -1,0 +1,16 @@
+{% extends "common/index.html" %}
+
+{% block content %}
+    {#    {% for host in hostList %}#}
+    {#        主机名:{{ host.hostname }} <br/>#}
+    {#    {% endfor %}#}
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+           <label>hostname:</label>{{ host.hostname }}
+            <label>ip:</label>{{ host.address }}
+        </div>
+    </div>
+
+
+{% endblock %}
