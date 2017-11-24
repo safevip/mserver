@@ -18,12 +18,12 @@ class HostList(ListView):
 class HostDetail(DetailView):
     context_object_name = 'host'
     # queryset = Host.objects.get()
+
     def get(self, request):
         id = request.GET.get("id")
         print(">>>>>>>>"+id)
         host = Host.objects.get(pk=id)
         return render_to_response("host/hostdetail.html", locals())
-
 
 
 class HostAdd(CreateView):
