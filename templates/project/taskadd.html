@@ -11,7 +11,7 @@
                 {% csrf_token %}
                 {#                ahaha <input type="text" placeholder="ahaha">#}
                 {{ form }}
-{#                <input type="hidden" name="projectId" value="{{ task.project.id }}">#}
+                <input type="hidden" name="projectId" value="{{ projectId }}">
                 <input type="submit" value="Submit"/>
             </form>
         </div>

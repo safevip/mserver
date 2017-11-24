@@ -1,6 +1,7 @@
 # Create your views here.
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response
 
 from project.forms import TaskForm
 from project.models import Project, Task
@@ -61,13 +62,38 @@ class TaskList(ListView):
         task_list = Task.objects.filter(project__id=projectId)
         return task_list
 
+    def get_context_data(self, **kwargs):
+        context = super(TaskList, self).get_context_data(**kwargs)
+        context['projectId'] = self.request.GET.get("projectId")
+        return context
+
 
 class TaskAdd(CreateView):
-    # model = Task
-    # success_url = "list"
-    # template_name = 'project/taskadd.html'
-    # form_class = TaskForm
-    pass
+    model = Task
+    template_name = 'project/taskadd.html'
+    form_class = TaskForm
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskAdd, self).get_context_data(**kwargs)
+        context['projectId'] = self.request.GET.get("projectId")
+        return context
+
+    def post(self, request):
+        # fields = ['name', 'desc', 'type', 'script', 'project']
+        name = self.request.POST.get("name")
+        desc = self.request.POST.get("desc")
+        type = self.request.POST.get("type")
+        script = self.request.POST.get("script")
+        project_id = self.request.POST.get("projectId")
+        task = Task()
+        task.name = name
+        task.desc = desc
+        task.type = type
+        task.script = script
+        task.project_id = project_id
+        task.save()
+        print((name, desc, type, script, project_id))
+        return HttpResponseRedirect("list?projectId=" + project_id)
 
 
 class TaskDel:
